@@ -19,6 +19,7 @@ import {TokenStorage} from './token.storage';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import {MaterialModule   } from './material/material.module';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -47,7 +48,8 @@ import {MaterialModule   } from './material/material.module';
     MatTableModule,
     BrowserModule,
     MaterialModule,
-    MatTableModule
+    MatTableModule,
+    ChartsModule
   ],
   exports: [
     MatSortModule,
@@ -59,7 +61,8 @@ import {MaterialModule   } from './material/material.module';
     HttpClientModule,
     MatTabsModule,
     MatTableModule,
-    MatTableModule
+    MatTableModule,
+    ChartsModule
   ],
   providers: [HttpClientModule, AppService, AuthService, TokenStorage ],
   bootstrap: [AppComponent]

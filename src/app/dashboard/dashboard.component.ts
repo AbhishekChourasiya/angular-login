@@ -3,8 +3,8 @@ import { Component, OnInit, ViewChild, AfterViewChecked, OnChanges, SimpleChange
 import { MatPaginator, MatTableDataSource, MatSort, MatCell } from '@angular/material';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
-
-
+import { ChartsModule, BaseChartDirective } from 'ng2-charts/ng2-charts';
+import * as Chart from 'chart.js';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
@@ -12,6 +12,29 @@ import { AppService } from '../app.service';
 })
 
 export class DashboardComponent implements AfterViewInit {
+    private datasets = [
+        {
+            label: '# of female Votes',
+            data: [12, 19, 3, 5, 2, 3]
+        },
+        {
+            label: '# of male Votes',
+            data: [22, 13, 13, 5, 8, 3]
+        }
+    ];
+
+    private labels = ['Kolkata', 'Delhi', 'Mumbai', 'Ranchi', 'Chennai', 'Pune'];
+
+    private options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    };
+
 
     displayedColumns = ['id', 'name', 'progress', 'color'];
     dataSource: MatTableDataSource<UserData>;
@@ -29,9 +52,31 @@ export class DashboardComponent implements AfterViewInit {
         //  alert('constructor');
     }
 
+    private barChartOptions: any = {
+        scaleShowVerticalLines: false,
+        responsive: true
+    };
+    private barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+    private barChartType = 'bar';
+    private barChartLegend = true;
+
+    private barChartData: any[] = [
+        { data: [65, 59, 80, 81, 56, 55, 40], label: '2015' },
+        { data: [28, 48, 40, 19, 86, 27, 90], label: '2019(predicted)' }
+    ];
+
+    // events
+    private chartClicked(e: any): void {
+        console.log(e);
+    }
+
+    private chartHovered(e: any): void {
+        console.log(e);
+    }
     ngAfterViewInit() {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+
     }
 
 
@@ -54,6 +99,7 @@ export class DashboardComponent implements AfterViewInit {
         this.dataSource.filter = filterValue;
         //   alert('apply filter');
     }
+
 }
 
 /** Builds and returns a new User. */
