@@ -1,27 +1,16 @@
 # AngularLogin
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+This project demonstrates how to add restricted access for selected resources using JWT Authentication Mechanism. We have a login component which calls our REST Api `localhost:8080/token/generate-token` together with username and password provided in login form.
 
-## Development server
+Our REST APi which is running on Spring Boot at `localhost:8080` validates the user by its credentials and generate a JWT Token and return it back to our application. Now when we are requesting access to our secured resources, we must set Authenticcation token in request header. e.g.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+`Authorization : Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmhpc2hlazEiLCJzY29wZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MCIsImlhdCI6MTUyODM2Nzg0NCwiZXhwIjoxNTI4MzY4NDQ0fQ.HzBKzjfQiTfFKlTaay9FCwMIA0ZhiIYj5RsaKsodWWA`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Whenever a valid token is found within the header, our REST Api will process the request and give back JSON response.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+# Note : 
+# This Project is the UI of a SpringBoot project runing on localhost:8080
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

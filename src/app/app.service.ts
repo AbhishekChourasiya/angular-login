@@ -10,25 +10,27 @@ const httpOptions = {
 };
 
 @Injectable()
-export class UserService {
+export class AppService {
     users;
-    constructor(private http: HttpClient) { }
-
-    private userUrl = 'http://localhost:8080';
-    headers;
-    public getUsers(): Observable<User[]> {
-        const auth_token = window.sessionStorage.getItem('Authorization');
+    auth_token;
+    constructor(private http: HttpClient) {
+        this.auth_token = window.sessionStorage.getItem('Authorization');
         const headers = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': auth_token
+            'Authorization': this.auth_token
           });
+     }
+
+    private userUrl = 'http://localhost:8080';
+    public getUsers(): Observable<User[]> {
 
 
         return this.http.options<User[]>(this.userUrl + '/user',
         {
-            headers: new HttpHeaders().set('Authorization', auth_token)
+            headers: new HttpHeaders().set('Authorization', this.auth_token)
           }
          );
         }
+
 
 }

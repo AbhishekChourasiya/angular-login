@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import {User} from './user.model';
-import {UserService} from '../app.service';
+import {AppService} from '../app.service';
 import {Router} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import {CdkTableModule} from '@angular/cdk/table';
@@ -12,9 +12,11 @@ import {CdkTableModule} from '@angular/cdk/table';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  // tslint:disable-next-line:semicolon
+
   displayedColumns = ['id', 'username', 'salary', 'age'];
   dataSource = new MatTableDataSource();
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: AppService) {
   }
   ngOnInit(): void {
     this.userService.getUsers().subscribe(
@@ -27,5 +29,13 @@ export class UserComponent implements OnInit {
   }
     );
   // console.log(this.dataSource);
+
+
+  }
+  logout(): void {
+    window.sessionStorage.removeItem('Authorization');
+    alert('Successfully logged out');
+    this.router.navigate(['login']);
   }
 }
+

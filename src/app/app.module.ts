@@ -9,13 +9,19 @@ import { UserComponent } from './user/user.component';
 import { AboutComponent} from './about/about.component';
 import {ContactComponent} from './contact/contact.component';
 import {FormsModule} from '@angular/forms';
-import {MatButtonModule, MatFormFieldModule, MatInputModule,  MatRippleModule} from '@angular/material';
+import {MatButtonModule, MatFormFieldModule, MatInputModule,  MatRippleModule, MatPaginatorModule, MatSortModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
-import { UserService } from './app.service';
+import { AppService } from './app.service';
 import { MatTabsModule, MatTableModule } from '@angular/material';
 
 import {AuthService} from './auth.service';
 import {TokenStorage} from './token.storage';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
+import {MaterialModule   } from './material/material.module';
+import { ChartsModule } from 'ng2-charts';
+
+
 
 @NgModule({
   declarations: [
@@ -23,9 +29,12 @@ import {TokenStorage} from './token.storage';
     LoginComponent,
     UserComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    DashboardComponent
   ],
   imports: [
+    MatSortModule,
+    MatPaginatorModule,
     BrowserModule,
     BrowserAnimationsModule,
     CustomMaterialModule,
@@ -36,18 +45,26 @@ import {TokenStorage} from './token.storage';
     MatTabsModule,
     MatRippleModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    BrowserModule,
+    MaterialModule,
+    MatTableModule,
+    ChartsModule
   ],
   exports: [
+    MatSortModule,
+    MatPaginatorModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
     HttpClientModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatTableModule,
+    ChartsModule
   ],
-  providers: [HttpClientModule, UserService, AuthService, TokenStorage ],
+  providers: [HttpClientModule, AppService, AuthService, TokenStorage ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
